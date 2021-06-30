@@ -1,0 +1,26 @@
+import todoApp from '../../pages/index/app.js';
+
+static function isToggleAllChecked(todos) {
+  for (const todo of todos) {
+    if (!todo.completed) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+class {
+  handleToggleAllOnChange(event) {
+    todoApp.toggleAllTodosCompleted(event.target.checked);
+  }
+}
+
+<section.main>
+  <input.toggle-all
+    id:scoped="toggle"
+    type="checkbox"
+    checked=isToggleAllChecked(input.todos)
+    on-change("handleToggleAllOnChange")/>
+  <label for:scoped="toggle"/>
+</section>

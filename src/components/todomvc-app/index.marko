@@ -1,0 +1,51 @@
+import todoApp from '../../pages/index/app.js'
+
+static function getTodoData(){
+  let remainingCount = 0;
+  let completedCount = 0;
+  const filter = todoApp.filter;
+  const filteredTodos = todoApp.todos.filter(todo => {
+    if(todo.completed){
+      completedCount++
+    }else {
+      remainingCount++
+    }
+
+    if(filter === 'active'){
+      return !todo.completed
+    }else if(filter === 'completed'){
+      return todo.completed
+    }else{
+      return true;
+    }
+  })
+
+  return {
+    todos: filteredTodos,
+    remainingCount,
+    completedCount,
+    filter
+  }
+
+}
+
+class {
+  onMount(){
+    this.subscribeTo(todoApp).on("change", () => {
+      this.forceUpdate();
+    });
+  }
+}
+
+style {
+  @import url("https://unpkg.com/todomvc-app-css@2.2.0/index.css");
+}
+
+<section.todoapp>
+  <todomvc-header/>
+  <if(todoApp.todos.length)>
+    $ const todoData = getTodoData();
+    <todomvc-main ...todoData/>
+    <todomvc-footer ...todoData/>
+  </if>
+</section>
